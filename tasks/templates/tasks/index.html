@@ -1,0 +1,9 @@
+{% if latest_question_list %}
+    <ul>
+    {% for tarefa in latest_question_list %}
+        <li><a href="{% url 'tasks:detail' tarefa.id %}">{{ tarefa.tarefa }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Não há tarefas disponíveis</p>
+{% endif %}
