@@ -12,7 +12,7 @@ class Tarefa(models.Model):
     arquivado = models.BooleanField(default=False)
     # ForeignKey
     usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-
+    marcador = models.ForeignKey('Marcador', on_delete=models.CASCADE)
 
 class Marcador(models.Model):
     def __str__(self):
@@ -20,18 +20,6 @@ class Marcador(models.Model):
     # colunas
     marcador = models.CharField(max_length=50)
     cor = models.CharField(max_length=7)
-    # relacionamentos m:n com Tarefa
-    tarefas = models.ManyToManyField(
-        Tarefa,
-        through='Tarefa_has_Marcador',
-        through_fields=('marcador', 'tarefa'),
-    )
-
-
-class Tarefa_has_Marcador(models.Model):
-    tarefa = models.ForeignKey(Tarefa, on_delete=models.CASCADE)
-    marcador = models.ForeignKey(Marcador, on_delete=models.CASCADE)
-
 
 class TarefaParcial(models.Model):
     def __str__(self):

@@ -4,7 +4,14 @@ from .models import Tarefa, Marcador, TarefaParcial, Usuario
 
 
 class TarefaAdmin(admin.ModelAdmin):
-    fields = ['tarefa', 'usuario']
+    fields = ['tarefa', 'usuario', 'descricao']
+    list_display = (
+                    'tarefa',
+                    'usuario',
+                    'data_abertura',
+                    'tarefa_tempo_total',
+                    'marcador',
+                    'arquivado')
 
 class MarcadorAdmin(admin.ModelAdmin):
     fields = ['marcador', 'cor']

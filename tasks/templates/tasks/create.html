@@ -1,0 +1,15 @@
+<h1>Crie uma Tarefa</h1>
+
+<form action="{% url 'tasks:create' %}" method="post">
+{% csrf_token %}
+    <label>tarefa</label><br>
+    <input type="text" name="tarefa" value="{{ tarefa.tarefa }}"></br>
+    <label>descrição</label><br>
+    <input type="text" name="descricao" value="{{ tarefa.descricao }}"></br>
+    <label>marcadores</label><br>
+    {% for marcador in marcadores %}
+        <input type="radio" name="marcador" value="{{ marcador.id }}">
+        {{ marcador.marcador }}</br>
+    {% endfor %}
+    <input type="submit" value="Criar">
+</form>
