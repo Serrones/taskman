@@ -1,0 +1,10 @@
+<h1>Faça o login</h1>
+
+<form action="{% url 'tasks:login_user' %}" method="post">
+{% csrf_token %}
+    <label>Login</label><br>
+    <input type="text" name="username" value="{{ username }}"></br>
+    <label>Senha</label><br>
+    <input type="password" name="password" value="{{ password }}"><br>
+    <input type="submit" value="Criar"><br>
+</form>

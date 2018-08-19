@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tarefa, Marcador, TarefaParcial, Usuario
+from .models import Tarefa, Marcador, TarefaParcial
 
 
 class TarefaAdmin(admin.ModelAdmin):
@@ -19,11 +19,7 @@ class MarcadorAdmin(admin.ModelAdmin):
 class TarefaParcialAdmin(admin.ModelAdmin):
     fields = ['tarefa', 'inicio_tarefa', 'final_tarefa']
 
-class UsuarioAdmin(admin.ModelAdmin):
-    fields = ['login', 'email']
-
 
 admin.site.register(Tarefa, TarefaAdmin)
 admin.site.register(Marcador, MarcadorAdmin)
 admin.site.register(TarefaParcial, TarefaParcialAdmin)
-admin.site.register(Usuario, UsuarioAdmin)

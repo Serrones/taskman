@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Tarefa(models.Model):
     def __str__(self):
@@ -11,8 +13,9 @@ class Tarefa(models.Model):
     tarefa_tempo_total =models.TimeField(null=True, blank=True)
     arquivado = models.BooleanField(default=False)
     # ForeignKey
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     marcador = models.ForeignKey('Marcador', on_delete=models.CASCADE)
+
 
 class Marcador(models.Model):
     def __str__(self):
@@ -20,6 +23,7 @@ class Marcador(models.Model):
     # colunas
     marcador = models.CharField(max_length=50)
     cor = models.CharField(max_length=7)
+
 
 class TarefaParcial(models.Model):
     def __str__(self):
@@ -29,12 +33,3 @@ class TarefaParcial(models.Model):
     final_tarefa = models.DateField(null=True, blank=True)
     # relacionamentos m:n com Tarefa
     tarefa = models.ForeignKey(Tarefa, on_delete=models.CASCADE)
-
-
-class Usuario(models.Model):
-    def __str__(self):
-        return self.login
-    # colunas
-    login = models.CharField(max_length=25)
-    senha = models.CharField(max_length=32)
-    email = models.CharField(max_length=50)

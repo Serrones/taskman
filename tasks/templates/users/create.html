@@ -1,0 +1,16 @@
+<h1>Crie um Usuário</h1>
+
+<form action="{% url 'tasks:create_user' %}" method="post">
+{% csrf_token %}
+    <label>Login</label><br>
+    <input type="text" name="username" value="{{ usuario.username }}"></br>
+    <label>e-mail</label><br>
+    <input type="email" name="email" value="{{ usuario.email }}"></br>
+    <label>Confirme o e-mail</label><br>
+    <input type="email" name="conf_email"></br>
+    <label>Senha</label><br>
+    <input type="password" name="password" value="{{ usuario.password }}"><br>
+    <label>Confirme a Senha</label><br>
+    <input type="password" name="conf_password"><br>
+    <input type="submit" value="Criar"><br>
+</form>

@@ -1,6 +1,6 @@
 <h1>Crie uma Tarefa</h1>
 
-<form action="{% url 'tasks:create' %}" method="post">
+<form action="{% url 'tasks:create_task' %}" method="post">
 {% csrf_token %}
     <label>tarefa</label><br>
     <input type="text" name="tarefa" value="{{ tarefa.tarefa }}"></br>
