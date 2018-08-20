@@ -1,0 +1,17 @@
+{% if latest_tasks %}
+    <ul>
+    {% for tarefa in latest_tasks %}
+        <li><a href="{% url 'tasks:task_detail' tarefa.id %}">{{ tarefa.tarefa }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Não há tarefas disponíveis</p>
+{% endif %}
+<div>
+    <p><a href="{% url 'tasks:create_task'%}">Crie uma Tarefa</a></p>
+</br>
+</div>
+<div>
+    <p><a href="{% url 'tasks:logout_user'%}">LogOut</a></p>
+    </br>
+</div>

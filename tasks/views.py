@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from .models import Tarefa, Marcador
 
@@ -16,33 +17,40 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect('/tasks')
+            return HttpResponseRedirect(reverse('tasks:home'))
 
         else:
             return render(request, 'users/login.html')
     else:
         return render(request, 'users/login.html')
 
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect('/tasks')
+
 
 def index(request):
+    return render(request, 'tasks/index.html')
+
+@login_required
+def home(request):
     latest_tasks = Tarefa.objects.order_by('-data_abertura')[:5]
-    template = loader.get_template('tasks/index.html')
     context = {
         'latest_tasks': latest_tasks,
     }
-    return render(request, 'tasks/index.html', context)
+    return render(request, 'tasks/home.html', context)
 
-
+@login_required
 def task_detail(request, tarefa_id):
     tarefa = get_object_or_404(Tarefa, pk=tarefa_id)
     return render(request, 'tasks/detail.html', {'tarefa': tarefa})
 
-
+@login_required
 def user_detail(request, user_id):
     usuario = get_object_or_404(User, pk=user_id)
     return render(request, 'users/detail.html', {'usuario': usuario})
 
-
+@login_required
 def create_task(request):
     if request.method == 'POST':
         user = User.objects.filter(username=request.user).first()
@@ -67,7 +75,7 @@ def create_user(request):
                             email=request.POST['email'])
             usuario.set_password(request.POST['password'])
             usuario.save()
-            return HttpResponseRedirect(reverse('tasks:user_detail', args=(usuario.id,)))
+            return HttpResponseRedirect(reverse('tasks:login_user'))
         else:
             usuario = User()
             return render(request, 'users/create.html', {'usuario': usuario})

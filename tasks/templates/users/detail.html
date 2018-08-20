@@ -1,5 +1,11 @@
-<h1>{{ usuario.username }}</h1>
+<h1>{{ usuario.usuario }}</h1>
 <div>
-    <p>Último Acesso</p>
-    <h5>{{ usuario.last_login }}</h5>
+<ul>
+    <li>{{ usuario.email }}</li>
+    <li>{{ usuario.last_login }}</li>
+</ul>
+</div>
+<div>
+    <p><a href="{% url 'tasks:home'%}">Voltar</a></p>
+    </br>
 </div>
